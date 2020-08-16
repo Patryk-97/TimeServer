@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{815f0906-f9dd-40f7-ba6b-1031dfeb6dc0}</ProjectGuid>
-    <RootNamespace>Server</RootNamespace>
+    <ProjectGuid>{c194da48-cda4-4140-8a09-d5a1395d3186}</ProjectGuid>
+    <RootNamespace>Client</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -85,11 +85,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../Communication/api;../../MyTimeLibrary/api;../../MyNetworkLibrary/api;../../MyMultithreadingLibrary/api;../../MyRandomizationLibrary/api;api;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>../../Communication/api;../../MyTimeLibrary/api;../../MyNetworkLibrary/api;../../MyMultithreadingLibrary/api;../../MyRandomizationLibrary/api;api;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,11 +102,11 @@
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../Communication/api;../../MyTimeLibrary/api;../../MyNetworkLibrary/api;../../MyMultithreadingLibrary/api;../../MyRandomizationLibrary/api;api;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>../../Communication/api;../../MyTimeLibrary/api;../../MyNetworkLibrary/api;../../MyMultithreadingLibrary/api;../../MyRandomizationLibrary/api;api;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,26 +152,24 @@
     <ClCompile Include="..\..\MyNetworkLibrary\src\TcpServerSocket.cpp" />
     <ClCompile Include="..\..\MyNetworkLibrary\src\TcpSocket.cpp" />
     <ClCompile Include="..\..\MyNetworkLibrary\src\WinsockManager.cpp" />
-    <ClCompile Include="..\..\MyRandomizationLibrary\src\RandomGenerator.cpp" />
     <ClCompile Include="..\..\MyTimeLibrary\src\TimeManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\ClientServiceThread.cpp" />
-    <ClCompile Include="src\ServerListener.cpp" />
+    <ClCompile Include="src\Client.cpp" />
+    <ClCompile Include="src\TimeSynchronizationThread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Communication\api\Communication.h" />
     <ClInclude Include="..\..\MyMultithreadingLibrary\api\IStoppableThread.h" />
     <ClInclude Include="..\..\MyMultithreadingLibrary\api\PausableThread.h" />
-    <ClInclude Include="..\..\MyNetworkLibrary\api\TcpClientSocket.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\IpProtocol.h" />
+    <ClInclude Include="..\..\MyNetworkLibrary\api\TcpClientSocket.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\TcpServerSocket.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\TcpSocket.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\TxProtocol.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\WinsockManager.h" />
-    <ClInclude Include="..\..\MyRandomizationLibrary\api\RandomGenerator.h" />
     <ClInclude Include="..\..\MyTimeLibrary\api\TimeManager.h" />
-    <ClInclude Include="api\ClientServiceThread.h" />
-    <ClInclude Include="api\ServerListener.h" />
+    <ClInclude Include="api\Client.h" />
+    <ClInclude Include="api\TimeSynchronizationThread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

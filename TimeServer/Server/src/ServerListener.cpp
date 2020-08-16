@@ -16,6 +16,7 @@ ServerListener::ServerListener()
 
 ServerListener::~ServerListener()
 {
+   this->server->close();
    delete this->server;
    delete this->serverListenerThread;
    for (auto& clientServiceThread : this->clientsThreads)

@@ -2,6 +2,8 @@
 
 #include "TcpSocket.h"
 
+#define RECV_BUFF_SIZE 4096
+
 class TcpClientSocket : public TcpSocket
 {
 public:

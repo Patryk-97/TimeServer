@@ -15,6 +15,8 @@ public:
    ~ServerListener();
 
    void listen();
+
+private:
    void disconnectClientCallback(ClientServiceThread* clientServiceThread);
 
 private:

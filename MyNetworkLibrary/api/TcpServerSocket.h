@@ -6,8 +6,6 @@
 
 #include <memory>
 
-#define RECV_BUFF_SIZE 4096
-
 class TcpServerSocket : public TcpSocket
 {
 public:
