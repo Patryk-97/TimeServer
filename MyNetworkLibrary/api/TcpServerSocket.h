@@ -1,12 +1,12 @@
 #pragma once
 
-#define RECV_BUFF_SIZE 4096
-
 #include "TcpSocket.h"
 #include "TcpClientSocket.h"
 #include "WinsockManager.h"
 
 #include <memory>
+
+#define RECV_BUFF_SIZE 4096
 
 class TcpServerSocket : public TcpSocket
 {
@@ -14,6 +14,7 @@ public:
    TcpServerSocket();
    ~TcpServerSocket();
    bool bind(const char* address, const uint16_t port);
+   bool bind(const uint16_t port);
    bool listen(const int backlog);
    TcpClientSocket* accept(void) const;
    uint16_t getLocalPort(void) const;

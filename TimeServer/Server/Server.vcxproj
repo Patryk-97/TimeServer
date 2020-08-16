@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../MyNetworkLibrary/api;../../MyNetworkLibrary/src;../../MyMultithreadingLibrary/api;../../MyMultithreadingLibrary/src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../MyNetworkLibrary/api;../../MyNetworkLibrary/src;../../MyMultithreadingLibrary/api;../../MyMultithreadingLibrary/src;../../MyRandomizationLibrary/api;../../MyRandomizationLibrary/src;api;src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../MyNetworkLibrary/api;../../MyNetworkLibrary/src;../../MyMultithreadingLibrary/api;../../MyMultithreadingLibrary/src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../MyNetworkLibrary/api;../../MyNetworkLibrary/src;../../MyMultithreadingLibrary/api;../../MyMultithreadingLibrary/src;../../MyRandomizationLibrary/api;../../MyRandomizationLibrary/src;api;src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,23 +143,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\MyMultithreadingLibrary\src\IStoppableCallable.cpp" />
-    <ClCompile Include="..\..\MyMultithreadingLibrary\src\PausableCallable.cpp" />
+    <ClCompile Include="..\..\MyMultithreadingLibrary\src\IStoppableThread.cpp" />
+    <ClCompile Include="..\..\MyMultithreadingLibrary\src\PausableThread.cpp" />
     <ClCompile Include="..\..\MyNetworkLibrary\src\TcpClientSocket.cpp" />
     <ClCompile Include="..\..\MyNetworkLibrary\src\TcpServerSocket.cpp" />
     <ClCompile Include="..\..\MyNetworkLibrary\src\TcpSocket.cpp" />
     <ClCompile Include="..\..\MyNetworkLibrary\src\WinsockManager.cpp" />
+    <ClCompile Include="..\..\MyRandomizationLibrary\src\RandomGenerator.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\ClientServiceThread.cpp" />
+    <ClCompile Include="src\ServerListener.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\MyMultithreadingLibrary\api\IStoppableCallable.h" />
-    <ClInclude Include="..\..\MyMultithreadingLibrary\api\PausableCallable.h" />
+    <ClInclude Include="..\..\MyMultithreadingLibrary\api\IStoppableThread.h" />
+    <ClInclude Include="..\..\MyMultithreadingLibrary\api\PausableThread.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\TcpClientSocket.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\IpProtocol.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\TcpServerSocket.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\TcpSocket.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\TxProtocol.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\WinsockManager.h" />
+    <ClInclude Include="..\..\MyRandomizationLibrary\api\RandomGenerator.h" />
+    <ClInclude Include="api\ClientServiceThread.h" />
+    <ClInclude Include="api\ServerListener.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

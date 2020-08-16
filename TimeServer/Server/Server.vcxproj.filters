@@ -21,12 +21,6 @@
     <ClCompile Include="..\..\MyNetworkLibrary\src\WinsockManager.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\MyMultithreadingLibrary\src\IStoppableCallable.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\MyMultithreadingLibrary\src\PausableCallable.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\MyNetworkLibrary\src\TcpServerSocket.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
@@ -34,6 +28,21 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="..\..\MyNetworkLibrary\src\TcpSocket.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MyRandomizationLibrary\src\RandomGenerator.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ServerListener.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MyMultithreadingLibrary\src\PausableThread.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\MyMultithreadingLibrary\src\IStoppableThread.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientServiceThread.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,12 +56,6 @@
     <ClInclude Include="..\..\MyNetworkLibrary\api\WinsockManager.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\MyMultithreadingLibrary\api\IStoppableCallable.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\MyMultithreadingLibrary\api\PausableCallable.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\MyNetworkLibrary\api\TcpServerSocket.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
@@ -60,6 +63,21 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="..\..\MyNetworkLibrary\api\TcpSocket.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MyRandomizationLibrary\api\RandomGenerator.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="api\ServerListener.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MyMultithreadingLibrary\api\PausableThread.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\MyMultithreadingLibrary\api\IStoppableThread.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="api\ClientServiceThread.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

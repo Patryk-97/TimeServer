@@ -28,6 +28,11 @@ bool TcpServerSocket::bind(const char* address, const uint16_t port)
    return rV;
 }
 
+bool TcpServerSocket::bind(const uint16_t port)
+{
+   return this->bind(nullptr, port);
+}
+
 bool TcpServerSocket::listen(const int backlog)
 {
    // locals
