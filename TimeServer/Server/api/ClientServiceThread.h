@@ -6,8 +6,6 @@
 #include "Communication.h"
 #include "Logger.h"
 
-#include <functional>
-
 using namespace std::string_literals;
 
 class ClientServiceThread : public IStoppableThread
@@ -16,11 +14,10 @@ public:
    ClientServiceThread(TcpClientSocket* client): client(client) {}
    ~ClientServiceThread();
 
-   void setDisconnectClientCallback(std::function<void(ClientServiceThread*)> disconnectClientCallback);
-
+   bool isDisconnected(void) const;
    void run(void) override;
 
 private:
-   TcpClientSocket* client {};
-   std::function<void(ClientServiceThread*)> disconnectClientCallback;
+   TcpClientSocket* client;
+   bool isDisconnectedFlag {};
 };

@@ -12,7 +12,7 @@ ServerListener::ServerListener()
       this->server->init(IpProtocol::IPV4, TxProtocol::TCP);
       uint16_t port = randomGenerator.getInteger(60000, 65535);
       bindable = this->server->bind(port);
-      std::cout << "bindable: " << (bindable ? "true" : "false") << " port: " << port << "\n";
+      Logger::consoleLog("bindable: "s + (bindable ? "true" : "false") + " port: "s + std::to_string(port));
    } while(!bindable);
    this->serverListenerThread = new ServerListenerThread(this);
 }
@@ -30,13 +30,35 @@ ServerListener::~ServerListener()
    this->clientsThreads.clear();
 }
 
-void ServerListener::listen()
+void ServerListener::listen(void)
 {
    this->serverListenerThread->start();
    while (true)
    {
-      ;
+      this->removeDisconnectedClients();
    }
+}
+
+void ServerListener::removeDisconnectedClients(void)
+{
+   {
+      std::lock_guard<std::mutex> lockGuard(this->locker);
+      for (size_t i = 0; i < this->clientsThreads.size(); i++)
+      {
+         if (this->clientsThreads[i]->isDisconnected())
+         {
+            delete this->clientsThreads[i];
+            this->clientsThreads.erase(this->clientsThreads.begin() + i);
+            i--;
+         }
+      }
+      if (clientsCount != this->clientsThreads.size())
+      {
+         clientsCount = this->clientsThreads.size();
+         Logger::consoleLog("Remained " + std::to_string(this->clientsThreads.size()) + " clients");
+      }
+   }
+   std::this_thread::sleep_for(TimeManager::milliseconds(1000));
 }
 
 ServerListener::ServerListenerThread::~ServerListenerThread()
@@ -63,15 +85,11 @@ void ServerListener::ServerListenerThread::run(void)
          break;
       }
 
-      ClientServiceThread* clientServiceThread = new ClientServiceThread(client);
-      clientServiceThread->setDisconnectClientCallback(std::bind(&ServerListener::disconnectClientCallback, this->serverListener, std::placeholders::_1));
-      clientServiceThread->start();
-      this->serverListener->clientsThreads.push_back(clientServiceThread);
+      {
+         std::lock_guard<std::mutex> lockGuard(this->serverListener->locker);
+         ClientServiceThread* clientServiceThread = new ClientServiceThread(client);
+         clientServiceThread->start();
+         this->serverListener->clientsThreads.push_back(clientServiceThread);
+      }
    }
-}
-
-void ServerListener::disconnectClientCallback(ClientServiceThread* clientServiceThread)
-{
-   this->clientsThreads.erase(std::find(this->clientsThreads.cbegin(), this->clientsThreads.cend(), clientServiceThread));
-   delete clientServiceThread;
 }

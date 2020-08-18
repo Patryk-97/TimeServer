@@ -11,7 +11,6 @@ void TimeSynchronizationThread::run(void)
 {
    // locals
    std::string_view requestCommand { Communication::GET_SYSTEM_TIME_REQ_STR };
-   Logger::consoleLog("Request command size: " + std::to_string(requestCommand.size()));
    int sentBytes {}, recvSize {};
    char recvBuff[RECV_BUFF_SIZE];
    std::string buffer;
@@ -19,7 +18,7 @@ void TimeSynchronizationThread::run(void)
    while (true)
    {
       uint64_t startTime = TimeManager::getTimeSinceEpoch();
-      Logger::consoleLog("Client start time: " + std::to_string(startTime));
+      //Logger::consoleLog("Client start time: " + std::to_string(startTime));
 
       if (false == this->client->send(requestCommand.data(), sentBytes) || sentBytes != requestCommand.size())
       {
@@ -36,12 +35,12 @@ void TimeSynchronizationThread::run(void)
 
       buffer = std::string(recvBuff, recvSize);
 
-      Logger::consoleLog("Client recv this command: " + buffer);
+      //Logger::consoleLog("Client recv this command: " + buffer);
 
       if (Communication::getCommand(buffer) == Communication::Command::GET_SYSTEM_TIME_RESP)
       {
          std::string timeFromServerStr = buffer.substr(Communication::GET_SYSTEM_TIME_RESP_STR.size() + 1, buffer.size());
-         Logger::consoleLog("Time from server: " + timeFromServerStr);
+         //Logger::consoleLog("Time from server: " + timeFromServerStr);
 
          uint64_t timeFromServer{};
 

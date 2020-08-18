@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include <thread>
 #include <vector>
+#include <memory>
 
 class ServerListener
 {
@@ -15,10 +16,10 @@ public:
    ServerListener();
    ~ServerListener();
 
-   void listen();
+   void listen(void);
 
 private:
-   void disconnectClientCallback(ClientServiceThread* clientServiceThread);
+   void removeDisconnectedClients(void);
 
 private:
    class ServerListenerThread : public IStoppableThread
@@ -28,9 +29,11 @@ private:
       ~ServerListenerThread();
       void run(void) override;
    private:
-      ServerListener* serverListener {};
+      ServerListener* serverListener;
    } *serverListenerThread;
 
    TcpServerSocket* server;
    std::vector<ClientServiceThread*> clientsThreads;
+   std::mutex locker;
+   size_t clientsCount {};
 };

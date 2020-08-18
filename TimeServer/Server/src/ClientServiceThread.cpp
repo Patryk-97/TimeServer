@@ -7,9 +7,10 @@ ClientServiceThread::~ClientServiceThread()
    delete this->client;
 }
 
-void ClientServiceThread::setDisconnectClientCallback(std::function<void(ClientServiceThread*)> disconnectClientCallback)
+
+bool ClientServiceThread::isDisconnected(void) const
 {
-   this->disconnectClientCallback = disconnectClientCallback;
+   return this->isDisconnectedFlag;
 }
 
 void ClientServiceThread::run(void)
@@ -34,7 +35,7 @@ void ClientServiceThread::run(void)
 
       buffer = std::string(recvBuff, recvCount);
 
-      Logger::consoleLog("Client command sent to server: " + buffer);
+      //Logger::consoleLog("Client command sent to server: " + buffer);
 
       if (Communication::getCommand(buffer) == Communication::Command::GET_SYSTEM_TIME_REQ)
       {
@@ -53,5 +54,6 @@ void ClientServiceThread::run(void)
       }
    }
 
-   this->disconnectClientCallback(this);
+   Logger::consoleLog("Disconnected client");
+   this->isDisconnectedFlag = true;
 }
