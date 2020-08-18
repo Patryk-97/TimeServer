@@ -2,7 +2,13 @@
 
 IStoppableThread::IStoppableThread()
 {
-
+   this->t = std::thread([&] {
+      {
+         std::unique_lock<std::mutex> uniqueLock(this->startMutex);
+         this->stoppableCondVar.wait(uniqueLock, [&]() { return this->isStarted(); });
+      }
+      this->run();
+   });
 }
 
 IStoppableThread::~IStoppableThread()

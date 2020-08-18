@@ -9,7 +9,10 @@ ServerListener::ServerListener()
    do
    {
       this->server = new TcpServerSocket();
-      bindable = this->server->bind(randomGenerator.getInteger(2000, 65535));
+      this->server->init(IpProtocol::IPV4, TxProtocol::TCP);
+      uint16_t port = randomGenerator.getInteger(60000, 65535);
+      bindable = this->server->bind(port);
+      std::cout << "bindable: " << (bindable ? "true" : "false") << " port: " << port << "\n";
    } while(!bindable);
    this->serverListenerThread = new ServerListenerThread(this);
 }
@@ -30,6 +33,10 @@ ServerListener::~ServerListener()
 void ServerListener::listen()
 {
    this->serverListenerThread->start();
+   while (true)
+   {
+      ;
+   }
 }
 
 ServerListener::ServerListenerThread::~ServerListenerThread()
@@ -47,7 +54,9 @@ void ServerListener::ServerListenerThread::run(void)
          break;
       }
 
+      Logger::consoleLog("Before new client");
       TcpClientSocket* client = this->serverListener->server->accept();
+      Logger::consoleLog("New client: [" + client->getLocalAddressIp() + ":" + std::to_string(client->getLocalPort()) + "]");
 
       if (nullptr == client)
       {

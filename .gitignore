@@ -34,3 +34,6 @@
 /TimeServer/.vs/*
 /TimeServer/Release/*
 /TimeServer/Client/Release/*
+/TimeServer/Client/Debug/*
+/TimeServer/Server/Debug/*
+/TimeServer/Debug/*

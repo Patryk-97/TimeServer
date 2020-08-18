@@ -2,6 +2,7 @@
 
 #include "TimeSynchronizationThread.h"
 #include "TcpClientSocket.h"
+#include "WinsockManager.h"
 
 #include <iostream>
 

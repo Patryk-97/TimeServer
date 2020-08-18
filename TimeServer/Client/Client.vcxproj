@@ -89,7 +89,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>../../Communication/api;../../MyTimeLibrary/api;../../MyNetworkLibrary/api;../../MyMultithreadingLibrary/api;../../MyRandomizationLibrary/api;api;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Communication/api;../../MyTimeLibrary/api;../../MyNetworkLibrary/api;../../MyMultithreadingLibrary/api;../../MyRandomizationLibrary/api;api;../../Utility/api;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,7 +106,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>../../Communication/api;../../MyTimeLibrary/api;../../MyNetworkLibrary/api;../../MyMultithreadingLibrary/api;../../MyRandomizationLibrary/api;api;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Communication/api;../../MyTimeLibrary/api;../../MyNetworkLibrary/api;../../MyMultithreadingLibrary/api;../../MyRandomizationLibrary/api;api;../../Utility/api;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +153,7 @@
     <ClCompile Include="..\..\MyNetworkLibrary\src\TcpSocket.cpp" />
     <ClCompile Include="..\..\MyNetworkLibrary\src\WinsockManager.cpp" />
     <ClCompile Include="..\..\MyTimeLibrary\src\TimeManager.cpp" />
+    <ClCompile Include="..\..\Utility\src\Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Client.cpp" />
     <ClCompile Include="src\TimeSynchronizationThread.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="..\..\MyNetworkLibrary\api\TxProtocol.h" />
     <ClInclude Include="..\..\MyNetworkLibrary\api\WinsockManager.h" />
     <ClInclude Include="..\..\MyTimeLibrary\api\TimeManager.h" />
+    <ClInclude Include="..\..\Utility\api\Logger.h" />
     <ClInclude Include="api\Client.h" />
     <ClInclude Include="api\TimeSynchronizationThread.h" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 #include "Communication.h"
 
-Communication::Command Communication::getCommand(const std::string& buffer)
+Communication::Command Communication::getCommand(std::string_view buffer)
 {
    // locals
    Communication::Command command = Communication::Command::UNDEFINED;

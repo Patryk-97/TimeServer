@@ -58,7 +58,7 @@ bool TcpSocket::send(const std::string& sendBuff, int& bytesSend)
    // locals
    bool rV = true;
 
-   bytesSend = ::send(this->socketId, sendBuff.c_str(), sendBuff.length() + 1, 0);
+   bytesSend = ::send(this->socketId, sendBuff.c_str(), sendBuff.length(), 0);
 
    if (bytesSend == SOCKET_ERROR)
    {

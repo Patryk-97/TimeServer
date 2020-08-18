@@ -20,7 +20,15 @@ void Client::start(void)
    std::cin >> port;
    TcpClientSocket* client = new TcpClientSocket();
    client->init(IpProtocol::IPV4, TxProtocol::TCP);
-   std::cout << client->connect(ipAddress.c_str(), port) ? "true\n" : "false\n";
-   client->close();
-   delete client;
+   if (client->connect("127.0.0.1", port) == false)
+   {
+      std::cout << WinsockManager::getErrorMessage() << "\n";
+   }
+
+   this->timeSynchronizationThread = new TimeSynchronizationThread(client);
+   this->timeSynchronizationThread->start();
+   while (true)
+   {
+      ;
+   }
 }

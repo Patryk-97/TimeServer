@@ -16,8 +16,8 @@ void ClientServiceThread::run(void)
 {
    // locals
    char recvBuff[RECV_BUFF_SIZE];
-   std::string buffer;
-   int recvCount {};
+   std::string buffer, sendBuffer;
+   int recvCount {}, bytesSent {};
 
    while (true)
    {
@@ -26,29 +26,30 @@ void ClientServiceThread::run(void)
          break;
       }
 
-      recvCount = this->client->recv(recvBuff, RECV_BUFF_SIZE);
-
-      if (recvCount <= 0)
+      if ((recvCount = this->client->recv(recvBuff, RECV_BUFF_SIZE)) <= 0)
       {
+         Logger::consoleLog("Server's side recv error!");
          break;
       }
 
-      buffer = std::string(recvCount, recvCount);
+      buffer = std::string(recvBuff, recvCount);
+
+      Logger::consoleLog("Client command sent to server: " + buffer);
 
       if (Communication::getCommand(buffer) == Communication::Command::GET_SYSTEM_TIME_REQ)
       {
-         std::string sendBuffer = Communication::GET_SYSTEM_TIME_RESP_STR + " "s + std::to_string(TimeManager::getTimeSinceEpoch());
-         int bytesSend {};
-         this->client->send(sendBuffer, bytesSend);
+         sendBuffer = Communication::GET_SYSTEM_TIME_RESP_STR.data() + " "s + std::to_string(TimeManager::getTimeSinceEpoch());
+         this->client->send(sendBuffer, bytesSent);
 
-         if (bytesSend != sendBuffer.size())
+         if (bytesSent != sendBuffer.size())
          {
+            Logger::consoleLog("Server's side send error!");
             break;
          }
       }
       else
       {
-         ;
+         Logger::consoleLog("Invalid client's command!");
       }
    }
 

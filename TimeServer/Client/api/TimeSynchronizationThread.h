@@ -4,13 +4,12 @@
 #include "IStoppableThread.h"
 #include "Communication.h"
 #include "TimeManager.h"
-
-#include <iostream>
+#include "Logger.h"
 
 class TimeSynchronizationThread : public IStoppableThread
 {
 public:
-   TimeSynchronizationThread(TcpClientSocket* client) : client(client), delay(TimeManager::milliseconds(0)) {}
+   TimeSynchronizationThread(TcpClientSocket* client) : client(client), delay(TimeManager::milliseconds(1000)) {}
    ~TimeSynchronizationThread();
 
    void run(void) override;

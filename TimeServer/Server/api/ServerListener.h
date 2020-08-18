@@ -5,6 +5,7 @@
 #include "RandomGenerator.h"
 #include "IStoppableThread.h"
 #include "ClientServiceThread.h"
+#include "Logger.h"
 #include <thread>
 #include <vector>
 
@@ -28,7 +29,7 @@ private:
       void run(void) override;
    private:
       ServerListener* serverListener {};
-   } *serverListenerThread {};
+   } *serverListenerThread;
 
    TcpServerSocket* server;
    std::vector<ClientServiceThread*> clientsThreads;

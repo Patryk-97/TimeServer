@@ -10,7 +10,8 @@ TimeSynchronizationThread::~TimeSynchronizationThread()
 void TimeSynchronizationThread::run(void)
 {
    // locals
-   const std::string& requestCommand = Communication::GET_SYSTEM_TIME_REQ_STR;
+   std::string_view requestCommand { Communication::GET_SYSTEM_TIME_REQ_STR };
+   Logger::consoleLog("Request command size: " + std::to_string(requestCommand.size()));
    int sentBytes {}, recvSize {};
    char recvBuff[RECV_BUFF_SIZE];
    std::string buffer;
@@ -18,22 +19,30 @@ void TimeSynchronizationThread::run(void)
    while (true)
    {
       uint64_t startTime = TimeManager::getTimeSinceEpoch();
+      Logger::consoleLog("Client start time: " + std::to_string(startTime));
 
-      if (false == (sentBytes = this->client->send(requestCommand, sentBytes)) || sentBytes != requestCommand.size())
+      if (false == this->client->send(requestCommand.data(), sentBytes) || sentBytes != requestCommand.size())
       {
+         Logger::consoleLog("Client's side send error! Sent bytes: " + 
+            std::to_string(sentBytes) + " requestCommand.size(): " + std::to_string(requestCommand.size()));
          break;
       }
 
       if((recvSize = this->client->recv(recvBuff, RECV_BUFF_SIZE)) <= 0)
       {
+         Logger::consoleLog("Client's side recv error!");
          break;
       }
 
       buffer = std::string(recvBuff, recvSize);
 
+      Logger::consoleLog("Client recv this command: " + buffer);
+
       if (Communication::getCommand(buffer) == Communication::Command::GET_SYSTEM_TIME_RESP)
       {
          std::string timeFromServerStr = buffer.substr(Communication::GET_SYSTEM_TIME_RESP_STR.size() + 1, buffer.size());
+         Logger::consoleLog("Time from server: " + timeFromServerStr);
+
          uint64_t timeFromServer{};
 
          try
@@ -49,8 +58,8 @@ void TimeSynchronizationThread::run(void)
 
          uint64_t delta = (uint64_t)(timeFromServer + (endTime - startTime) / 2.0 - timeFromServer);
 
-         std::cout << "Time: " + TimeManager::serializeTimeSinceEpoch(endTime + delta) << "\n";
-         std::cout << "Delta: " + std::to_string(delta) << "ms";
+         Logger::consoleLog("Time: " + TimeManager::serializeTimeSinceEpoch(endTime + delta));
+         Logger::consoleLog("Delta: " + std::to_string(delta) + "ms");
       }
 
 

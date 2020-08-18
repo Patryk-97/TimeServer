@@ -4,6 +4,7 @@
 #include "IStoppableThread.h"
 #include "TimeManager.h"
 #include "Communication.h"
+#include "Logger.h"
 
 #include <functional>
 
