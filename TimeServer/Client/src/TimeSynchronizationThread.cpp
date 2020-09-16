@@ -55,9 +55,9 @@ void TimeSynchronizationThread::run(void)
 
          uint64_t endTime = TimeManager::getTimeSinceEpoch();
 
-         uint64_t delta = (uint64_t)(timeFromServer + (endTime - startTime) / 2.0 - timeFromServer);
+         uint64_t delta = (uint64_t)(timeFromServer + (endTime - startTime) / 2.0 - endTime);
 
-         Logger::consoleLog("Time: " + TimeManager::serializeTimeSinceEpoch(endTime + delta));
+         Logger::consoleLog("Time: " + TimeManager::serializeTimeSinceEpoch(endTime + delta, TimeManager::TimeZone::LOCAL));
          Logger::consoleLog("Delta: " + std::to_string(delta) + "ms");
       }
 
