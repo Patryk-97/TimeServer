@@ -8,7 +8,6 @@
 #include "Logger.h"
 #include <thread>
 #include <vector>
-#include <memory>
 
 class ServerListener
 {

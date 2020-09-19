@@ -5,15 +5,16 @@ ServerListener::ServerListener()
    // locals
    bool bindable { false };
    RandomGenerator& randomGenerator = RandomGenerator::getInstance();
+   uint16_t port = 0;
 
    do
    {
       this->server = new TcpServerSocket();
       this->server->init(IpProtocol::IPV4, TxProtocol::TCP);
-      uint16_t port = randomGenerator.getInteger(60000, 65535);
+      port = randomGenerator.getInteger(49152, 65535);
       bindable = this->server->bind(port);
-      Logger::consoleLog("bindable: "s + (bindable ? "true" : "false") + " port: "s + std::to_string(port));
    } while(!bindable);
+   Logger::consoleLog(std::string("Served bind successful, port: " + std::to_string(port)));
    this->serverListenerThread = new ServerListenerThread(this);
 }
 
@@ -76,7 +77,6 @@ void ServerListener::ServerListenerThread::run(void)
          break;
       }
 
-      Logger::consoleLog("Before new client");
       TcpClientSocket* client = this->serverListener->server->accept();
       Logger::consoleLog("New client: [" + client->getLocalAddressIp() + ":" + std::to_string(client->getLocalPort()) + "]");
 

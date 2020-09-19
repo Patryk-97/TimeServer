@@ -19,5 +19,5 @@ public:
 
 private:
    TcpClientSocket* client;
-   bool isDisconnectedFlag {};
+   volatile bool isDisconnectedFlag {};
 };
